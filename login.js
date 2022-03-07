@@ -37,4 +37,4 @@ const doLoginFyers = async (username, password, pin) => {
     await driver.quit();
 };
 
-doLoginFyers(ENV['USERNAME'], ENV['PASSWORD'], ENV['PIN']);
+doLoginFyers(process.env['USERNAME'], process.env['PASSWORD'], process.env['PIN']);

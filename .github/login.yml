@@ -1,0 +1,23 @@
+# UNIT TEST
+
+name: Unit-test
+on:
+  schedule:
+    - cron: '*/15 * * * *'
+jobs:
+  run-unit-test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2
+        with:
+          node-version: '14.5.0'
+      - uses: browser-actions/setup-chrome@latest
+      - uses: nanasess/setup-chromedriver@v1
+      - run: |
+        export DISPLAY=:99
+        chromedriver --url-base=/wd/hub &
+        sudo Xvfb -ac :99 -screen 0 1280x1024x24 > /dev/null 2>&1 & # optional
+      - run: chrome --version
+      - run: npm install
+      - run: npm run start

@@ -1,6 +1,6 @@
 # UNIT TEST
 
-name: Unit-test
+name: AutoLogin
 on:
   schedule:
     - cron: '*/15 * * * *'
@@ -12,8 +12,5 @@ jobs:
       - uses: actions/setup-node@v2
         with:
           node-version: '14.5.0'
-      - uses: browser-actions/setup-chrome@latest
-      - uses: nanasess/setup-chromedriver@v1
-      - run: chrome --version
       - run: npm install
       - run: npm run start

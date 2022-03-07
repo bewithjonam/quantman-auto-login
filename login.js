@@ -33,8 +33,12 @@ const doLoginFyers = async (username, password, pin) => {
 
     await driver.wait(until.titleIs('Quantman'), 3000);
     console.log('step 4 completed');
-
     await driver.quit();
 };
 
-doLoginFyers(process.env['USERNAME'], process.env['PASSWORD'], process.env['PIN']);
+doLoginFyers(process.env['USERNAME'], process.env['PASSWORD'], process.env['PIN'])
+  .then(() => console.log('successfully completed'))
+  .catch((e) => {
+    console.log('exiting with error ', e);
+    process.exit(1)
+  });

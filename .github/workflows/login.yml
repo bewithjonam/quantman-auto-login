@@ -1,9 +1,22 @@
-# UNIT TEST
-
 name: AutoLogin
 on:
-  schedule:
-    - cron: '*/15 * * * *'
+  # schedule:
+  #   - cron: '*/15 * * * *'
+  workflow_dispatch:
+    inputs:
+      name:
+        type: choice
+        description: Who to greet
+        options: 
+        - monalisa
+        - cschleiden
+      message:
+        required: true
+      use-emoji:
+        type: boolean
+        description: Include 🎉🤣 emojis
+      environment:
+        type: environment
 jobs:
   run-unit-test:
     runs-on: ubuntu-latest
@@ -12,5 +25,7 @@ jobs:
       - uses: actions/setup-node@v2
         with:
           node-version: '14.5.0'
+      - uses: browser-actions/setup-chrome@latest
+      - run: chrome --version
       - run: npm install
       - run: npm run start

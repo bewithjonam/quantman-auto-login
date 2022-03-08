@@ -2,6 +2,10 @@ name: AutoLogin
 on:
   # schedule:
   #   - cron: '*/15 * * * *'
+  push:
+    # Sequence of patterns matched against refs/heads
+    branches:    
+      - main
   workflow_dispatch:
     inputs:
       name:

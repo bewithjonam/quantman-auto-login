@@ -10,13 +10,6 @@ on:
         options: 
         - monalisa
         - cschleiden
-      message:
-        required: true
-      use-emoji:
-        type: boolean
-        description: Include 🎉🤣 emojis
-      environment:
-        type: environment
 jobs:
   run-unit-test:
     runs-on: ubuntu-latest

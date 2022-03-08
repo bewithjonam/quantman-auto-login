@@ -2,17 +2,17 @@ name: AutoLogin
 on:
   schedule:
     - cron: '0 2 * * *'
-  # push:
-  #   branches:    
-  #     - main
-  # workflow_dispatch:
-  #   inputs:
-  #     name:
-  #       type: choice
-  #       description: Dummy input
-  #       options: 
-  #       - foo
-  #       - bar
+  push:
+    branches:    
+      - main
+  workflow_dispatch:
+    inputs:
+      name:
+        type: choice
+        description: Dummy input
+        options: 
+        - foo
+        - bar
 jobs:
   do-auto-login:
     runs-on: ubuntu-latest

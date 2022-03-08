@@ -1,0 +1,50 @@
+{
+  "name": "quantman-auto-login",
+  "description": "Daily Selenium Browser Job to login into quantman",
+  "repository": "https://github.com/bewithjonam/quantman-auto-login",
+  "logo": "https://nodejs.org/static/images/logos/nodejs-new-pantone-black.svg",
+  "keywords": ["quantman", "auto-login"],
+  "buildpacks": [
+    {
+      "url": "heroku/nodejs"
+    },
+    {
+      "url": "https://github.com/heroku/heroku-buildpack-chromedriver"
+    },
+    {
+      "url": "https://github.com/heroku/heroku-buildpack-google-chrome"
+    }
+  ],
+  "addons": [
+    {
+      "plan": "scheduler:standard",
+      "options": {
+
+      }
+    },
+    {
+      "plan": "heroku-postgresql",
+      "options": {
+        "version": "9.5"
+      }
+    }
+  ],
+  "formation": {
+    "web": {
+      "quantity": 0,
+    }
+  },
+  "env": {
+    "USERNAME": {
+      "description": "broker user id"
+    },
+    "PASSWORD": {
+      "description": "broker user password"
+    },
+    "PIN": {
+      "description": "login pin"
+    },
+    "CHROME_DRIVER_PATH": "/app/.chromedriver/bin/chromedriver",
+    "CHROME_BINARY_PATH": "/app/.apt/opt/google/chrome/chrome"
+  }
+}

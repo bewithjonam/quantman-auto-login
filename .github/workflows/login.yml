@@ -18,9 +18,10 @@ jobs:
       - uses: actions/setup-node@v2
         with:
           node-version: '14.5.0'
-      - uses: cypress-io/github-action@v2
-        with:
-          browser: chrome
-          headless: true
+      - uses: browser-actions/setup-chrome@latest
+      # - uses: cypress-io/github-action@v2
+      #   with:
+      #     browser: chrome
+      #     headless: true
       - run: npm install
-      - run: npm run start
+      - run: CHROMIUM_BIN=$(which chrome) npm run start

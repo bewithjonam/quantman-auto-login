@@ -22,7 +22,7 @@ jobs:
       - uses: actions/setup-node@v2
         with:
           node-version: '14.5.0'
-      # - uses: browser-actions/setup-chrome@latest
+      - uses: browser-actions/setup-chrome@latest
       # - uses: cypress-io/github-action@v2
       #   with:
       #     browser: chrome

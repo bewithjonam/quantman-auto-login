@@ -11,14 +11,17 @@ on:
         - monalisa
         - cschleiden
 jobs:
-  run-unit-test:
+  do-auto-login:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v2
         with:
           node-version: '14.5.0'
-      - uses: browser-actions/setup-chrome@latest
-      - run: chrome --version
+      - name: Chrome headless
+        uses: ./
+        with:
+          browser: chrome
+          headless: true
       - run: npm install
       - run: npm run start

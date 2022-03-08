@@ -32,4 +32,9 @@ jobs:
       # - run: google-chrome --version
       # - run: which google-chrome
       - run: npm install
-      - run: CHROMIUM_BIN=$(which chrome) npm run start
+      - name: run selenium autologin
+        env: 
+          USERNAME: ${{ secrets.USERNAME }}
+          PASSWORD: ${{ secrets.PASSWORD }}
+          PIN: ${{ secrets.PIN }}
+        run: CHROMIUM_BIN=$(which chrome) npm run start

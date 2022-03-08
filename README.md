@@ -19,4 +19,4 @@ Daily Cron Job runner that opens browser, do login via your broker credentials a
   - In the disclaimer warning message in the center of the page, click "Enable Workflow"
 - Now daily at 07:30, the enabled action will login in you into QuantMan using the credentials filled in the repository's secret.
 
-![Help Image](/blob/main/helpimage.png?raw=true)
+![Help Image](/helpimage.png?raw=true)

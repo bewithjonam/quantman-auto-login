@@ -1,4 +1,4 @@
-const { customizedSplit, delay, screen } = require('./helper');
+const { customizedSplit, delay, screen, ZEBU_LOGIN_URL, QUANTMAN_SIGN_IN_URL } = require('./helper');
 const { Builder, By, until } = require('selenium-webdriver');
 const chrome = require('selenium-webdriver/chrome');
 
@@ -11,7 +11,7 @@ const doLoginZebu = async (username, password, pin) => {
 
   driver.manage().setTimeouts({ implicit: 3000, pageLoad: 300000, script: 30000 })
 
-  await driver.get('https://zebull.in/#/login');
+  await driver.get(ZEBU_LOGIN_URL);
   console.log('Login Page opened');
 
   await delay(1000);
@@ -31,7 +31,7 @@ const doLoginZebu = async (username, password, pin) => {
   console.log(`step 3 completed for ${username}`);
   await delay(1000);
 
-  await driver.get('https://www.quantman-staging.in/users/sign_in');
+  await driver.get(QUANTMAN_SIGN_IN_URL);
   await delay(1000);
 
   console.log(`step 4 completed for ${username}`);

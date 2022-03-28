@@ -1,4 +1,4 @@
-const { customizedSplit, delay, screen } = require('./helper');
+const { customizedSplit, delay, screen, QUANTMAN_SIGN_IN_URL } = require('./helper');
 const { Builder, By, until } = require('selenium-webdriver');
 const chrome = require('selenium-webdriver/chrome');
 
@@ -11,7 +11,7 @@ const doLoginZerodha = async (username, password, pin) => {
 
   driver.manage().setTimeouts({ implicit: 3000, pageLoad: 300000, script: 30000 })
 
-  await driver.get('https://www.quantman-staging.in/users/sign_in');
+  await driver.get(QUANTMAN_SIGN_IN_URL);
   console.log('Login Page opened');
 
   (await driver.findElement(By.id('zerodha-user-auth'))).click()

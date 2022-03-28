@@ -1,4 +1,4 @@
-const { customizedSplit, delay, screen } = require('./helper');
+const { customizedSplit, delay, screen, QUANTMAN_URL } = require('./helper');
 const { Builder, By, until } = require('selenium-webdriver');
 const chrome = require('selenium-webdriver/chrome');
 
@@ -11,7 +11,7 @@ const doLoginAliceBlue = async (username, password, pin) => {
 
   driver.manage().setTimeouts({ implicit: 3000, pageLoad: 300000, script: 30000 })
 
-  await driver.get('https://www.quantman.in/auth/aliceblue');
+  await driver.get(`${QUANTMAN_URL}/auth/aliceblue`);
   console.log('Login Page opened');
 
   await delay(1000);

@@ -1,53 +1,66 @@
-const { Builder, By, until } = require('selenium-webdriver');
-const chrome = require('selenium-webdriver/chrome');
+const FYERS = require('./Brokers/fyers');
+const ANGLE_BROKING = require('./Brokers/angleBroking');
+const ICICI =  require('./Brokers/icici');
+const ZERODHA = require('./Brokers/zerodha');
+const ALICE_BLUE = require('./Brokers/aliceBlue');
+const ZEBU = require('./Brokers/zebu')
 
-const screen = {
-  width: 640,
-  height: 480
-};
-
-function delay(ms) {
-  return new Promise(resolve => setTimeout(resolve, ms));
+const BROKERS = {
+  FYERS,
+  ANGLE_BROKING,
+  ICICI,
+  ZERODHA, // T-otp (so stopped)
+  ALICE_BLUE,
+  ZEBU
 }
 
-const doLoginFyers = async (username, password, pin) => {
-  var driver = new Builder()
-    .forBrowser('chrome')
-    .setChromeOptions(new chrome.Options().headless().windowSize(screen))
-    .build();
-  console.log('Browser initialized');
+// FYERS
+// const userDetails = {
+//   USERNAMES: 'XR09644, DP00897',
+//   PASSWORDS: 'ABCdef!!!345, Sairam90!',
+//   PINS: '1988, 1987',
+//   BROKER: 'FYERS'
+// }
 
-  driver.manage().setTimeouts({ implicit: 3000, pageLoad: 300000, script: 30000 })
-  
-  await driver.get('https://www.quantman.in/auth/fyers');
-  console.log('Login Page opened');
+// ANGLE_BROKING
+// const userDetails = {
+//   USERNAMES: 'M615665',
+//   PASSWORDS: 'ABCdef!!!123',
+//   BROKER: 'ANGLE_BROKING'
+// }
 
-  await delay(1000);
-  (await driver.findElement(By.name('fy_client_id'))).sendKeys(username);
-  (await driver.findElement(By.id('clientIdSubmit'))).click();
-  console.log('step 1 completed');
+// ICICI
+// const userDetails = {
+//   USERNAMES: '9597232959',
+//   PASSWORDS: 'ABCdef!!!123',
+//   PINS: '11061988',
+//   BROKER: 'ICICI'
+// }
 
-  await delay(1000);
-  (await driver.findElement(By.name('fy_client_pwd'))).sendKeys(password);
-  (await driver.findElement(By.id('loginSubmit'))).click();
-  console.log('step 2 completed');
+// ZERODHA
+// const userDetails = {
+//   USERNAMES: 'DP1637',
+//   PASSWORDS: 'shirdisai5000c',
+//   PINS: '411218',
+//   BROKER: 'ZERODHA'
+// }
 
-  await delay(1000);
-  (await driver.findElement(By.id('verifyPinForm')).findElement(By.id('first'))).sendKeys(pin[0]);
-  (await driver.findElement(By.id('verifyPinForm')).findElement(By.id('second'))).sendKeys(pin[1]);
-  (await driver.findElement(By.id('verifyPinForm')).findElement(By.id('third'))).sendKeys(pin[2]);
-  (await driver.findElement(By.id('verifyPinForm')).findElement(By.id('fourth'))).sendKeys(pin[3]);
-  (await driver.findElement(By.id('verifyPinForm')).findElement(By.id('verifyPinSubmit'))).click();
-  console.log('step 3 completed');
+// AliceBlue
+// const userDetails = {
+//   USERNAMES: '524419',
+//   PASSWORDS: 'ABCdef!!!123',
+//   PINS: '1988',
+//   BROKER: 'ALICE_BLUE'
+// }
 
-  await driver.wait(until.titleIs('Quantman'), 3000);
-  console.log('step 4 completed');
-  await driver.quit();
-};
+// ZEBU
+const userDetails = {
+  USERNAMES: 'cz397',
+  PASSWORDS: 'saisai90!!!',
+  PINS: '909090',
+  BROKER: 'ZEBU'
+}
 
-doLoginFyers(process.env['USERNAME'], process.env['PASSWORD'], process.env['PIN'])
-  .then(() => console.log('successfully completed'))
-  .catch((e) => {
-    console.log('exiting with error ', e);
-    process.exit(1)
-  });
+BROKERS[userDetails.BROKER].doLogin(userDetails)
+
+// process.env['USERNAME'], process.env['PASSWORD'], process.env['PIN']

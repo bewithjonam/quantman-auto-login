@@ -1,4 +1,4 @@
-const { customizedSplit, delay, screen, ZEBU_LOGIN_URL, QUANTMAN_SIGN_IN_URL } = require('./helper');
+const { delay, screen, ZEBU_LOGIN_URL, QUANTMAN_SIGN_IN_URL } = require('./helper');
 const { Builder, By, until } = require('selenium-webdriver');
 const chrome = require('selenium-webdriver/chrome');
 
@@ -35,7 +35,7 @@ const doLoginZebu = async (username, password, pin, securityQuestion1, securityQ
 
   var driver = new Builder()
     .forBrowser('chrome')
-    // .setChromeOptions(new chrome.Options().headless().windowSize(screen))
+    .setChromeOptions(new chrome.Options().headless().windowSize(screen))
     .build();
   console.log('Browser initialized');
 
@@ -62,8 +62,8 @@ const doLoginZebu = async (username, password, pin, securityQuestion1, securityQ
 
     (await driver.findElement(By.xpath("//input[@formcontrolname = 'answer1']"))).sendKeys(securityQuestion1);
     (await driver.findElement(By.xpath("//input[@formcontrolname = 'answer2']"))).sendKeys(securityQuestion2);
-    // (await driver.findElement(By.xpath("//input[@value = 'Submit']"))).click();
-    // quantmanLoginFlow();
+    (await driver.findElement(By.xpath("//input[@value = 'Submit']"))).click();
+    quantmanLoginFlow();
   }
 };
 

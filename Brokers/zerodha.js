@@ -1,11 +1,11 @@
-const { customizedSplit, delay, screen, QUANTMAN_SIGN_IN_URL } = require('./helper');
+const { delay, screen, QUANTMAN_SIGN_IN_URL } = require('./helper');
 const { Builder, By, until } = require('selenium-webdriver');
 const chrome = require('selenium-webdriver/chrome');
 
 const doLoginZerodha = async (username, password, pin) => {
   var driver = new Builder()
     .forBrowser('chrome')
-    // .setChromeOptions(new chrome.Options().headless().windowSize(screen))
+    .setChromeOptions(new chrome.Options().headless().windowSize(screen))
     .build();
   console.log('Browser initialized');
 

@@ -17,12 +17,12 @@ const doLoginFyers = async (username, password, pin) => {
   await delay(1000);
   (await driver.findElement(By.name('fy_client_id'))).sendKeys(username);
   (await driver.findElement(By.id('clientIdSubmit'))).click();
-  console.log(`step 1 completed for ${username}`);
+  console.log(`step 1 completed `);
 
   await delay(1000);
   (await driver.findElement(By.name('fy_client_pwd'))).sendKeys(password);
   (await driver.findElement(By.id('loginSubmit'))).click();
-  console.log(`step 2 completed for ${username}`);
+  console.log(`step 2 completed `);
 
   await delay(1000);
 
@@ -31,10 +31,10 @@ const doLoginFyers = async (username, password, pin) => {
   (await driver.findElement(By.id('verifyPinForm')).findElement(By.id('third'))).sendKeys(pin[2]);
   (await driver.findElement(By.id('verifyPinForm')).findElement(By.id('fourth'))).sendKeys(pin[3]);
   (await driver.findElement(By.id('verifyPinForm')).findElement(By.id('verifyPinSubmit'))).click();
-  console.log(`step 3 completed for ${username}`);
+  console.log(`step 3 completed `);
 
   await driver.wait(until.titleIs('Quantman'), 3000);
-  console.log(`step 4 completed for ${username}`);
+  console.log(`step 4 completed `);
 
   await driver.quit();
 };

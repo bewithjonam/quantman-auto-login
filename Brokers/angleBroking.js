@@ -17,14 +17,14 @@ const doLoginAngleBroking = async (username, password) => {
   await delay(1000);
   (await driver.findElement(By.id('client-code'))).sendKeys(username);
   (await driver.findElement(By.name('password'))).sendKeys(password);
-  console.log(`step 1 completed for ${username}`);
+  console.log(`step 1 completed `);
 
   await delay(1000);
   (await driver.findElement(By.id('sign-in'))).click();
-  console.log(`step 2 completed for ${username}`);
+  console.log(`step 2 completed `);
 
   await driver.wait(until.titleIs('Quantman'), 5000);
-  console.log(`step 3 completed for ${username}`);
+  console.log(`step 3 completed `);
 
   await driver.quit();
 };

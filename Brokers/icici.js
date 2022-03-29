@@ -20,7 +20,7 @@ const doLoginIcici = async (username, password, pin) => {
   await delay(1000);
   (await driver.findElement(By.id('icici_direct-client-id'))).sendKeys(username);
   (await driver.findElement(By.id('btn-icici_direct'))).click();
-  console.log(`step 1 completed for ${username}`);
+  console.log(`step 1 completed `);
 
 
   await delay(1000);
@@ -29,10 +29,10 @@ const doLoginIcici = async (username, password, pin) => {
   (await driver.findElement(By.id('txtdob'))).sendKeys(pin);
   (await driver.findElement(By.id('chkssTnc'))).click();
   (await driver.findElement(By.id('btnSubmit'))).click();
-  console.log(`step 2 completed for ${username}`);
+  console.log(`step 2 completed `);
 
   await driver.wait(until.titleIs('Quantman'), 3000);
-  console.log(`step 3 completed for ${username}`);
+  console.log(`step 3 completed `);
 
   await driver.quit();
 };

@@ -35,8 +35,7 @@ const loginFunc = async () => {
       securityQuestion2: securityQuestions2[index] || '',
     };
 
-    console.log(`client${index + 1} details ----->`, args, broker);
-
+    console.log('BROKER ----->', broker);
     await AVAILABLE_BROKERS[broker].doLogin(args)
 
     index++;

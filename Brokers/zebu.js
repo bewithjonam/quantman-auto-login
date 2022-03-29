@@ -2,7 +2,37 @@ const { customizedSplit, delay, screen, ZEBU_LOGIN_URL, QUANTMAN_SIGN_IN_URL } =
 const { Builder, By, until } = require('selenium-webdriver');
 const chrome = require('selenium-webdriver/chrome');
 
-const doLoginZebu = async (username, password, pin) => {
+const doLoginZebu = async (username, password, pin, securityQuestion1, securityQuestion2) => {
+  const quantmanLoginFlow = async () => {
+    await delay(2000)
+
+    driver.switchTo().newWindow();
+    console.log(`step 3 completed for ${username}`);
+    await delay(1000);
+
+    await driver.get(QUANTMAN_SIGN_IN_URL);
+    await delay(1000);
+
+    console.log(`step 4 completed for ${username}`);
+
+    (await driver.findElement(By.id('zebull-user-auth'))).click()
+    await delay(1000);
+
+    console.log(`step 5 completed for ${username}`);
+
+    (await driver.findElement(By.className('modal-body'))
+      .findElement(By.className("form-control"))).sendKeys(username);
+
+    (await driver.findElement(By.id('btn-zebull'))).click();
+    console.log(`step 6 completed for ${username}`);
+
+    await driver.wait(until.titleIs('Quantman'), 3000);
+    console.log(`step 7 completed for ${username}`);
+    await delay(3000);
+
+    await driver.quit();
+  };
+
   var driver = new Builder()
     .forBrowser('chrome')
     // .setChromeOptions(new chrome.Options().headless().windowSize(screen))
@@ -19,62 +49,35 @@ const doLoginZebu = async (username, password, pin) => {
   (await driver.findElement(By.xpath("//input[@value = 'Submit']"))).click();
   console.log(`step 1 completed for ${username}`);
   await delay(2000);
+  try {
+    (await driver.findElement(By.xpath("//input[@formcontrolname = 'mpin']"))).sendKeys(pin);
+    (await driver.findElement(By.xpath("//input[@value = 'Submit']"))).click();
+    console.log(`step 2 completed for ${username}`);
+    quantmanLoginFlow();
+  }
+  catch (err) {
+    (await driver.findElement(By.xpath("//input[@formcontrolname = 'password']"))).sendKeys(password);
+    (await driver.findElement(By.xpath("//input[@value = 'Submit']"))).click();
+    await delay(1000);
 
-  (await driver.findElement(By.xpath("//input[@formcontrolname = 'mpin']"))).sendKeys(pin);
-  (await driver.findElement(By.xpath("//input[@value = 'Submit']"))).click();
-  console.log(`step 2 completed for ${username}`);
-
-
-  await delay(2000)
-
-  driver.switchTo().newWindow();
-  console.log(`step 3 completed for ${username}`);
-  await delay(1000);
-
-  await driver.get(QUANTMAN_SIGN_IN_URL);
-  await delay(1000);
-
-  console.log(`step 4 completed for ${username}`);
-
-  (await driver.findElement(By.id('zebull-user-auth'))).click()
-  await delay(1000);
-
-  console.log(`step 5 completed for ${username}`);
-
-  (await driver.findElement(By.className('modal-body'))
-    .findElement(By.className("form-control"))).sendKeys(username);
-
-  (await driver.findElement(By.id('btn-zebull'))).click();
-  console.log(`step 6 completed for ${username}`);
-
-
-  await driver.wait(until.titleIs('Quantman'), 3000);
-  console.log(`step 7 completed for ${username}`);
-
-  await driver.quit();
+    (await driver.findElement(By.xpath("//input[@formcontrolname = 'answer1']"))).sendKeys(securityQuestion1);
+    (await driver.findElement(By.xpath("//input[@formcontrolname = 'answer2']"))).sendKeys(securityQuestion2);
+    // (await driver.findElement(By.xpath("//input[@value = 'Submit']"))).click();
+    // quantmanLoginFlow();
+  }
 };
 
 
 const doLogin = async (args) => {
-  const usernames = customizedSplit(args['USERNAMES']);
-  const passwords = customizedSplit(args['PASSWORDS']);
-  const pins = customizedSplit(args['PINS']);
-  let index = 0;
+  const { username, password, pin, securityQuestion1, securityQuestion2 } = args;
 
-  for (const username of usernames) {
-    const password = passwords[index];
-    const pin = pins[index];
-
-    await doLoginZebu(username, password, pin)
-      .then(() => {
-        console.log('successfully completed')
-      })
-      .catch((e) => {
-        console.log('exiting with error ', e);
-      });
-
-    index++;
-  }
+  await doLoginZebu(username, password, pin, securityQuestion1, securityQuestion2)
+    .then(() => {
+      console.log('successfully completed')
+    })
+    .catch((e) => {
+      console.log('exiting with error ', e);
+    });
 };
 
 module.exports = {

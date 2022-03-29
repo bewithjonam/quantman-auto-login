@@ -31,25 +31,15 @@ const doLoginAngleBroking = async (username, password) => {
 
 
 const doLogin = async (args) => {
-  const usernames = customizedSplit(args['USERNAMES']);
-  const passwords = customizedSplit(args['PASSWORDS']);
-  let index = 0;
+  const { username, password } = args;
 
-  for (const username of usernames) {
-    const password = passwords[index];
-
-    await doLoginAngleBroking(username, password)
-      .then(() => {
-        console.log('successfully completed')
-      })
-      .catch((e) => {
-        console.log('exiting with error ', e);
-      });
-
-    // await delay(10000)
-
-    index++;
-  }
+  await doLoginAngleBroking(username, password)
+    .then(() => {
+      console.log('successfully completed')
+    })
+    .catch((e) => {
+      console.log('exiting with error ', e);
+    });
 };
 
 module.exports = {

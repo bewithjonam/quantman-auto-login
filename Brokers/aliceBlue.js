@@ -39,25 +39,15 @@ const doLoginAliceBlue = async (username, password, pin) => {
 
 
 const doLogin = async (args) => {
-  const usernames = customizedSplit(args['USERNAMES']);
-  const passwords = customizedSplit(args['PASSWORDS']);
-  const pins = customizedSplit(args['PINS']);
-  let index = 0;
+  const { username, password, pin } = args;
 
-  for (const username of usernames) {
-    const password = passwords[index];
-    const pin = pins[index];
-
-    await doLoginAliceBlue(username, password, pin)
-      .then(() => {
-        console.log('successfully completed')
-      })
-      .catch((e) => {
-        console.log('exiting with error ', e);
-      });
-
-    index++;
-  }
+  await doLoginAliceBlue(username, password, pin)
+    .then(() => {
+      console.log('successfully completed')
+    })
+    .catch((e) => {
+      console.log('exiting with error ', e);
+    });
 };
 
 module.exports = {

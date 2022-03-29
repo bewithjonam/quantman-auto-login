@@ -31,27 +31,15 @@ const doLoginZerodha = async (username, password, pin) => {
 
 
 const doLogin = async (args) => {
-  const usernames = customizedSplit(args['USERNAMES']);
-  const passwords = customizedSplit(args['PASSWORDS']);
-  const pins = customizedSplit(args['PINS']);
-  let index = 0;
+  const { username, password, pin } = args;
 
-  for (const username of usernames) {
-    const password = passwords[index];
-    const pin = pins[index];
-
-    await doLoginZerodha(username, password, pin)
-      .then(() => {
-        console.log('successfully completed')
-      })
-      .catch((e) => {
-        console.log('exiting with error ', e);
-      });
-
-    // await delay(10000)
-
-    index++;
-  }
+  await doLoginZerodha(username, password, pin)
+    .then(() => {
+      console.log('successfully completed')
+    })
+    .catch((e) => {
+      console.log('exiting with error ', e);
+    });
 };
 
 module.exports = {

@@ -7,27 +7,27 @@ const doLoginZebu = async (username, password, pin, securityQuestion1, securityQ
     await delay(2000)
 
     driver.switchTo().newWindow();
-    console.log(`step 3 completed for ${username}`);
+    console.log(`step 3 completed `);
     await delay(1000);
 
     await driver.get(QUANTMAN_SIGN_IN_URL);
     await delay(1000);
 
-    console.log(`step 4 completed for ${username}`);
+    console.log(`step 4 completed `);
 
     (await driver.findElement(By.id('zebull-user-auth'))).click()
     await delay(1000);
 
-    console.log(`step 5 completed for ${username}`);
+    console.log(`step 5 completed `);
 
     (await driver.findElement(By.className('modal-body'))
       .findElement(By.className("form-control"))).sendKeys(username);
 
     (await driver.findElement(By.id('btn-zebull'))).click();
-    console.log(`step 6 completed for ${username}`);
+    console.log(`step 6 completed `);
 
     await driver.wait(until.titleIs('Quantman'), 3000);
-    console.log(`step 7 completed for ${username}`);
+    console.log(`step 7 completed `);
     await delay(3000);
 
     await driver.quit();
@@ -47,12 +47,12 @@ const doLoginZebu = async (username, password, pin, securityQuestion1, securityQ
   await delay(1000);
   (await driver.findElement(By.xpath("//input[@formcontrolname = 'userId']"))).sendKeys(username);
   (await driver.findElement(By.xpath("//input[@value = 'Submit']"))).click();
-  console.log(`step 1 completed for ${username}`);
+  console.log(`step 1 completed `);
   await delay(2000);
   try {
     (await driver.findElement(By.xpath("//input[@formcontrolname = 'mpin']"))).sendKeys(pin);
     (await driver.findElement(By.xpath("//input[@value = 'Submit']"))).click();
-    console.log(`step 2 completed for ${username}`);
+    console.log(`step 2 completed `);
     quantmanLoginFlow();
   }
   catch (err) {

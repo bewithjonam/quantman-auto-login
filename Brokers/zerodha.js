@@ -19,12 +19,12 @@ const doLoginZerodha = async (username, password, pin) => {
   await delay(1000);
   (await driver.findElement(By.id('zerodha-client-id'))).sendKeys(username);
   (await driver.findElement(By.id('zerodha-login'))).click();
-  console.log(`step 1 completed for ${username}`);
+  console.log(`step 1 completed `);
 
   // stopped because of T-otp...
 
   // await driver.wait(until.titleIs('Quantman'), 3000);
-  // console.log(`step 3 completed for ${username}`);
+  // console.log(`step 3 completed `);
 
   // await driver.quit();
 };

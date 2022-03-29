@@ -9,53 +9,30 @@ Daily Cron Job runner that opens browser, do login via your broker credentials a
 - *Settings* 
   - Click the "Settings" button to go to the settings page.
   - Select Secrets. And within secrets Actions (in the left side panel).
-  1. FYERS
-    1.1  Click New Repository Secret. Add USERNAMES => <value> (fill in your fyers broker client id's)
+
+    1. Click New Repository Secret. Add USERNAMES => <value> (fill in your fyers broker client id's)
       e.g XP00000, 00000PQ
-    1.2   Click New Repository Secret. Add PASSWORDS => <value> (fill in your fyers broker client password's)
+    2. Click New Repository Secret. Add PASSWORDS => <value> (fill in your fyers broker client password's)
       e.g ABCDF, ERTYUJ
-    1.3 Click New Repository Secret. Add PINS => <value> (fill in your fyers broker client pin's)
+    3. Click New Repository Secret. Add PINS => <value> (fill in your fyers broker client pin's)
       e.g 0000, 1111
-    1.4 Click New Repository Secret. Add BROKER => <value> (fill in your broker name)
-      e.g FYERS.. Value must be FYERS
-  
-  2. ANGLE_BROKING
-    2.1  Click New Repository Secret. Add USERNAMES => <value> (fill in your angle client id's)
-      e.g XP00000, 00000PQ
-    2.2   Click New Repository Secret. Add PASSWORDS => <value> (fill in your angle broker client password's)
-      e.g ABCDF, ERTYUJ
-    2.3 Click New Repository Secret. Add BROKER => <value> (fill in your broker name)
-      e.g ANGLE_BROKING.. Value must be ANGLE_BROKING
+    4. Click New Repository Secret. Add BROKERS => <value> (fill in your broker's name)
+      e.g FYERS, ANGLE_BROKING, ICICI, ALICE_BLUE, ZEBU (mandatory format)
+    5. Click New Repository Secret. Add SECURITY_QUESTIONS1 => <value> (fill in your security questions name)
+      e.g 1,2,3,4,ABC (ZEBU) 
+    6. Click New Repository Secret. Add SECURITY_QUESTIONS2 => <value> (fill in your security questions name)
+      e.g 1,2,3,4,ABC (ZEBU)
 
-  3. ICICI
-    3.1  Click New Repository Secret. Add USERNAMES => <value> (fill in your icici broker client id's)
-      e.g XP00000, 00000PQ
-    3.2   Click New Repository Secret. Add PASSWORDS => <value> (fill in your icici broker client password's)
-      e.g ABCDF, ERTYUJ
-    3.3 Click New Repository Secret. Add PINS => <value> (fill in your icici broker client pin's)
-      e.g 11062400, 11062024 (DOB or PAN).. DOB must be combined reference Example... Not like 11-06-2024 (restricted)
-    3.4 Click New Repository Secret. Add BROKER => <value> (fill in your broker name)
-      e.g ICICI.. Value must be ICICI
-
-  4. ALICE_BLUE
-    4.1  Click New Repository Secret. Add USERNAMES => <value> (fill in your aliceblue broker client id's)
-      e.g XP00000, 00000PQ
-    4.2   Click New Repository Secret. Add PASSWORDS => <value> (fill in your aliceblue broker client password's)
-      e.g ABCDF, ERTYUJ
-    4.3 Click New Repository Secret. Add PINS => <value> (fill in your aliceblue broker client pin's)
-      e.g 1111, 00000
-    4.4 Click New Repository Secret. Add BROKER => <value> (fill in your broker name)
-      e.g ALICE_BLUE.. Value must be ALICE_BLUE
-
-  5. ZEBU
-    5.1  Click New Repository Secret. Add USERNAMES => <value> (fill in your zebu broker client id's)
-      e.g XP00000, 00000PQ
-    5.2   Click New Repository Secret. Add PASSWORDS => <value> (fill in your zebu broker client password's)
-      e.g ABCDF, ERTYUJ
-    5.3 Click New Repository Secret. Add PINS => <value> (fill in your zebu broker client pin's)
-      e.g 1111, 00000
-    5.4 Click New Repository Secret. Add BROKER => <value> (fill in your broker name)
-      e.g ZEBU.. Value must be ZEBU
+    - If you don't have any fields.. Please give dummy values.. like Zebu only have security questions..
+      remaining doesn't have ? so give dummy eg: 1,2,3,4,ZEBU.. this is for all fields
+    - Another example.. angle broking doesn't have pin.. so give "dummy pin 1111",  it willnot be considered.. but have to give
+    - All 6 fields.. matching with index..
+      eg: USERNAMES           :  11111111, 2222222, ...
+          PASSWORDS           :  oqijwihq, kjcixhw, ...
+          PINS                :  1111, 11111, ...
+          BROKERS             :  FYRES, ANGLE_BROKING, ...
+          SECURITY_QUESTIONS1 :  0, 1, 2, 3, ...
+          SECURITY_QUESTIONS2 :  0, 1, 2, 3, ...
 
 - *Actions*
   - Click "Actions" button at the top of the page.

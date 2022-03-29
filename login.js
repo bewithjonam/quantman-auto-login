@@ -1,53 +1,46 @@
-const { Builder, By, until } = require('selenium-webdriver');
-const chrome = require('selenium-webdriver/chrome');
+const FYERS = require('./Brokers/fyers');
+const ANGLE_BROKING = require('./Brokers/angleBroking');
+const ICICI = require('./Brokers/icici');
+const ZERODHA = require('./Brokers/zerodha');
+const ALICE_BLUE = require('./Brokers/aliceBlue');
+const ZEBU = require('./Brokers/zebu');
+const { customizedSplit } = require('./Brokers/helper');
 
-const screen = {
-  width: 640,
-  height: 480
-};
-
-function delay(ms) {
-  return new Promise(resolve => setTimeout(resolve, ms));
+const AVAILABLE_BROKERS = {
+  FYERS,
+  ANGLE_BROKING,
+  ICICI,
+  ZERODHA, // T-otp (so stopped)
+  ALICE_BLUE,
+  ZEBU
 }
 
-const doLoginFyers = async (username, password, pin) => {
-  var driver = new Builder()
-    .forBrowser('chrome')
-    .setChromeOptions(new chrome.Options().headless().windowSize(screen))
-    .build();
-  console.log('Browser initialized');
+const brokers = customizedSplit(process.env['BROKERS']);
+const usernames = customizedSplit(process.env['USERNAMES']);
+const passwords = customizedSplit(process.env['PASSWORDS']);
+const pins = customizedSplit(process.env['PINS']);
+const securityQuestions1 = customizedSplit(process.env['SECURITY_QUESTIONS1']);
+const securityQuestions2 = customizedSplit(process.env['SECURITY_QUESTIONS2']);
 
-  driver.manage().setTimeouts({ implicit: 3000, pageLoad: 300000, script: 30000 })
-  
-  await driver.get('https://www.quantman.in/auth/fyers');
-  console.log('Login Page opened');
 
-  await delay(1000);
-  (await driver.findElement(By.name('fy_client_id'))).sendKeys(username);
-  (await driver.findElement(By.id('clientIdSubmit'))).click();
-  console.log('step 1 completed');
+const loginFunc = async () => {
+  let index = 0;
+  for (const broker of brokers) {
 
-  await delay(1000);
-  (await driver.findElement(By.name('fy_client_pwd'))).sendKeys(password);
-  (await driver.findElement(By.id('loginSubmit'))).click();
-  console.log('step 2 completed');
+    const args = {
+      username: usernames[index] || '',
+      password: passwords[index] || '',
+      pin: pins[index] || '',
+      securityQuestion1: securityQuestions1[index] || '',
+      securityQuestion2: securityQuestions2[index] || '',
+    };
 
-  await delay(1000);
-  (await driver.findElement(By.id('verifyPinForm')).findElement(By.id('first'))).sendKeys(pin[0]);
-  (await driver.findElement(By.id('verifyPinForm')).findElement(By.id('second'))).sendKeys(pin[1]);
-  (await driver.findElement(By.id('verifyPinForm')).findElement(By.id('third'))).sendKeys(pin[2]);
-  (await driver.findElement(By.id('verifyPinForm')).findElement(By.id('fourth'))).sendKeys(pin[3]);
-  (await driver.findElement(By.id('verifyPinForm')).findElement(By.id('verifyPinSubmit'))).click();
-  console.log('step 3 completed');
+    console.log(`client${index + 1} details ----->`, args, broker);
 
-  await driver.wait(until.titleIs('Quantman'), 3000);
-  console.log('step 4 completed');
-  await driver.quit();
-};
+    await AVAILABLE_BROKERS[broker].doLogin(args)
 
-doLoginFyers(process.env['USERNAME'], process.env['PASSWORD'], process.env['PIN'])
-  .then(() => console.log('successfully completed'))
-  .catch((e) => {
-    console.log('exiting with error ', e);
-    process.exit(1)
-  });
+    index++;
+  };
+}
+
+loginFunc();

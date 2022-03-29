@@ -24,7 +24,10 @@ jobs:
       - run: npm install
       - name: Autologin Script
         env: 
-          USERNAME: ${{ secrets.USERNAME }}
-          PASSWORD: ${{ secrets.PASSWORD }}
-          PIN: ${{ secrets.PIN }}
+          USERNAMES: ${{ secrets.USERNAMES }}
+          PASSWORDS: ${{ secrets.PASSWORDS }}
+          PINS: ${{ secrets.PINS }}
+          BROKERS: ${{ secrets.BROKERS }}
+          SECURITY_QUESTIONS1: ${{ secrets.SECURITY_QUESTIONS1 }}
+          SECURITY_QUESTIONS2: ${{ secrets.SECURITY_QUESTIONS2 }}
         run: CHROMIUM_BIN=$(which chrome) npm run start

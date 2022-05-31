@@ -45,13 +45,13 @@ const doLoginZebu = async (username, password, pin, securityQuestion1, securityQ
   console.log('Login Page opened');
 
   await delay(1000);
-  (await driver.findElement(By.xpath("//input[@formcontrolname = 'userId']"))).sendKeys(username);
-  (await driver.findElement(By.xpath("//input[@value = 'Submit']"))).click();
+  (await driver.findElement(By.xpath("//input[@placeholder='Enter your User ID']"))).sendKeys(username);
+  (await driver.findElement(By.xpath("//button[@type = 'button']"))).click();
   console.log(`step 1 completed `);
   await delay(2000);
   try {
-    (await driver.findElement(By.xpath("//input[@formcontrolname = 'mpin']"))).sendKeys(pin);
-    (await driver.findElement(By.xpath("//input[@value = 'Submit']"))).click();
+    (await driver.findElement(By.xpath("//input[@placeholder = 'Enter your M-Pin']"))).sendKeys(pin);
+    (await driver.findElement(By.xpath("//button[@type = 'button']"))).click();
     console.log(`step 2 completed `);
     quantmanLoginFlow();
   }

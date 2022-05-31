@@ -4,6 +4,7 @@ const ICICI = require('./Brokers/icici');
 const ZERODHA = require('./Brokers/zerodha');
 const ALICE_BLUE = require('./Brokers/aliceBlue');
 const ZEBU = require('./Brokers/zebu');
+const FLATTRADE = require('./Brokers/flattrade')
 const { customizedSplit } = require('./Brokers/helper');
 
 const AVAILABLE_BROKERS = {
@@ -12,7 +13,8 @@ const AVAILABLE_BROKERS = {
   ICICI,
   ZERODHA, // T-otp (so stopped)
   ALICE_BLUE,
-  ZEBU
+  ZEBU,
+  FLATTRADE
 }
 
 const brokers = customizedSplit(process.env['BROKERS']);
@@ -21,7 +23,6 @@ const passwords = customizedSplit(process.env['PASSWORDS']);
 const pins = customizedSplit(process.env['PINS']);
 const securityQuestions1 = customizedSplit(process.env['SECURITY_QUESTIONS1']);
 const securityQuestions2 = customizedSplit(process.env['SECURITY_QUESTIONS2']);
-
 
 const loginFunc = async () => {
   let index = 0;

@@ -30,7 +30,7 @@ const doLoginFlattrade = async (username, password, pin) => {
   (await driver.findElement(By.id('sbmt'))).click();
   console.log(`step 2 completed `);
 
-  await driver.wait(until.titleIs('Quantman'), 3000);
+  await driver.wait(until.titleIs('Quantman'), 8000);
   console.log(`step 3 completed `);
 
   await driver.quit();

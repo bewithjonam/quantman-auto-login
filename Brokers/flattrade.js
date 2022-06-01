@@ -19,14 +19,29 @@ const doLoginFlattrade = async (username, password, pin) => {
 
   await delay(1000);
   (await driver.findElement(By.id('flattrade-client-id'))).sendKeys(username);
+
   (await driver.findElement(By.id('btn-flattrade'))).click();
   console.log(`step 1 completed `);
+  await delay(2000);
 
+  let staleElement = true;
+  while (staleElement) {
+    try {
+      (await driver.findElement(By.xpath("//input[@type = 'text']"))).sendKeys(username);
+      staleElement = false;
+    } catch (error) {
+      console.log(error)
+      staleElement = true;
+    }
+  }
 
-  await delay(3000);
-  (await driver.findElement(By.id('input-17'))).sendKeys(username);
+  await delay(1000);
   (await driver.findElement(By.id('pwd'))).sendKeys(password);
+  await delay(1000);
+
   (await driver.findElement(By.id('pan'))).sendKeys(pin);
+  await delay(2000);
+
   (await driver.findElement(By.id('sbmt'))).click();
   console.log(`step 2 completed `)
 

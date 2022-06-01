@@ -23,14 +23,14 @@ const doLoginFlattrade = async (username, password, pin) => {
   console.log(`step 1 completed `);
 
 
-  await delay(1000);
+  await delay(3000);
   (await driver.findElement(By.id('input-17'))).sendKeys(username);
   (await driver.findElement(By.id('pwd'))).sendKeys(password);
   (await driver.findElement(By.id('pan'))).sendKeys(pin);
   (await driver.findElement(By.id('sbmt'))).click();
-  console.log(`step 2 completed `);
+  console.log(`step 2 completed `)
 
-  await driver.wait(until.titleIs('Quantman'), 15000);
+  await driver.wait(until.titleIs('Quantman'), 3000);
   console.log(`step 3 completed `);
 
   await driver.quit();

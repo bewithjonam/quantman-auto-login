@@ -7,7 +7,6 @@ const doLoginFlattrade = async (username, password, pin) => {
     .forBrowser('chrome')
     .setChromeOptions(new chrome.Options().headless().windowSize(screen))
     .build();
-  console.log('Browser initialized');
 
   driver.manage().setTimeouts({ implicit: 3000, pageLoad: 300000, script: 30000 })
 
@@ -22,31 +21,28 @@ const doLoginFlattrade = async (username, password, pin) => {
 
   (await driver.findElement(By.id('btn-flattrade'))).click();
   console.log(`step 1 completed `);
-  await delay(2000);
+  await delay(3000);
 
-  let staleElement = true;
-  while (staleElement) {
-    try {
-      (await driver.findElement(By.xpath("//input[@type = 'text']"))).sendKeys(username);
-      staleElement = false;
-    } catch (error) {
-      console.log(error)
-      staleElement = true;
-    }
-  }
-
+  console.log(`step 2 username completed `);
   await delay(1000);
   (await driver.findElement(By.id('pwd'))).sendKeys(password);
+  (await driver.findElement(By.xpath("//input[@type = 'text']"))).sendKeys(username);
+
+  console.log(`step 3 password completed `);
+
   await delay(1000);
 
   (await driver.findElement(By.id('pan'))).sendKeys(pin);
+
+  console.log(`step 4 pin completed`);
+
   await delay(2000);
 
   (await driver.findElement(By.id('sbmt'))).click();
-  console.log(`step 2 completed `)
+  console.log(`step 5 submit completed `);
 
-  await driver.wait(until.titleIs('Quantman'), 3000);
-  console.log(`step 3 completed `);
+  await driver.wait(until.titleIs('Quantman'), 5000);
+  console.log(`step 6 Quantman title completed `);
 
   await driver.quit();
 };
